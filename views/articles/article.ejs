@@ -1,0 +1,118 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container">
+    <div class="add-article-section">
+        <button class="add-article-btn" onclick="openAddArticleModal()">
+            <span class="btn-icon">✏️</span>
+            <span class="btn-text">Add New Article</span>
+        </button>
+    </div>
+
+    <div class="posts-grid">
+        <a href="/articles/1">
+            <article class="post-card" >
+                <span class="post-category">JavaScript</span>
+                <h3 class="post-title">Node.js Performance: Memory Management Best Practices</h3>
+                <p class="post-excerpt">
+                    Optimize your Node.js applications with proven memory management strategies and performance
+                    monitoring techniques.
+                </p>
+                <div class="post-meta">
+                    <span>March 18, 2024</span>
+                    <div class="read-time">
+                        <span>📖</span>
+                        <span>7 min read</span>
+                    </div>
+                </div>
+            </article>
+        </a>
+
+        <article class="post-card">
+            <span class="post-category">Design</span>
+            <h3 class="post-title">Mastering CSS Grid: Advanced Layout Techniques</h3>
+            <p class="post-excerpt">
+                Learn advanced CSS Grid techniques to create complex, responsive layouts that adapt
+                beautifully across all devices.
+            </p>
+            <div class="post-meta">
+                <span>March 20, 2024</span>
+                <div class="read-time">
+                    <span>📖</span>
+                    <span>5 min read</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="post-card">
+            <span class="post-category">AI</span>
+            <h3 class="post-title">Building Intelligent UIs with Machine Learning</h3>
+            <p class="post-excerpt">
+                Discover how to integrate machine learning models into your web applications for smarter, more
+                adaptive user interfaces.
+            </p>
+            <div class="post-meta">
+                <span>March 16, 2024</span>
+                <div class="read-time">
+                    <span>📖</span>
+                    <span>12 min read</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="post-card">
+            <span class="post-category">DevOps</span>
+            <h3 class="post-title">Container Orchestration: Docker to Kubernetes</h3>
+            <p class="post-excerpt">
+                A comprehensive guide to scaling your applications from single Docker containers to full
+                Kubernetes clusters.
+            </p>
+            <div class="post-meta">
+                <span>March 14, 2024</span>
+                <div class="read-time">
+                    <span>📖</span>
+                    <span>10 min read</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="post-card">
+            <span class="post-category">Security</span>
+            <h3 class="post-title">Web Security in 2024: Essential Protection Strategies</h3>
+            <p class="post-excerpt">
+                Stay ahead of cyber threats with the latest security practices and tools every web developer
+                should know.
+            </p>
+            <div class="post-meta">
+                <span>March 12, 2024</span>
+                <div class="read-time">
+                    <span>📖</span>
+                    <span>6 min read</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="post-card">
+            <span class="post-category">Mobile</span>
+            <h3 class="post-title">Progressive Web Apps: The Native App Alternative</h3>
+            <p class="post-excerpt">
+                Build fast, engaging web applications that work offline and feel like native mobile apps using
+                PWA technology.
+            </p>
+            <div class="post-meta">
+                <span>March 10, 2024</span>
+                <div class="read-time">
+                    <span>📖</span>
+                    <span>9 min read</span>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+
+<script>
+    function openAddArticleModal() {
+        window.location.href = "/articles/create";
+    }
+</script>
+
+<%- include("../partials/footer.ejs") %>

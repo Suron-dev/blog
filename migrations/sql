@@ -1,0 +1,29 @@
+-- 1. User table
+CREATE TABLE "user" (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    user_name VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(250) NOT NULL,
+    role VARCHAR(50) DEFAULT 'user'
+);
+
+-- 2. Category table
+CREATE TABLE category (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) UNIQUE NOT NULL
+);
+
+-- 3. Article table with foreign keys to user and category
+CREATE TABLE article (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    category_id INTEGER NOT NULL REFERENCES category(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    excerpt TEXT NOT NULL,
+    content TEXT NOT NULL,
+    user_id INTEGER NOT NULL REFERENCES "user"(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    read_time INTEGER NOT NULL CHECK (read_time >= 1 AND read_time <= 60),
+    tags VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

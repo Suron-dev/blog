@@ -1,0 +1,124 @@
+<%- include("partials/header.ejs") %>
+
+
+        <div class="search-container">
+            <div class="search-icon">🔍</div>
+            <input type="text" class="search-input" placeholder="Search articles...">
+        </div>
+
+        <section class="featured-section">
+            <h2 class="section-title">Featured Article</h2>
+            <article class="featured-post">
+                <span class="featured-category">Technology</span>
+                <h3 class="featured-title">The Future of Web Development: Beyond React and Vue</h3>
+                <p class="featured-excerpt">
+                    Explore the cutting-edge frameworks and technologies that are reshaping how we build modern web applications. From micro-frontends to edge computing, discover what's coming next in the world of frontend development.
+                </p>
+                <div class="featured-meta">
+                    <div style="display: flex; align-items: center; gap: 0.8rem;">
+                        <div class="author-avatar"></div>
+                        <span>Sarah Chen</span>
+                    </div>
+                    <span>March 22, 2024</span>
+                    <span>8 min read</span>
+                </div>
+            </article>
+        </section>
+
+        <section>
+            <h2 class="section-title">Latest Articles</h2>
+            <div class="posts-grid">
+                <article class="post-card">
+                    <span class="post-category">Design</span>
+                    <h3 class="post-title">Mastering CSS Grid: Advanced Layout Techniques</h3>
+                    <p class="post-excerpt">
+                        Learn advanced CSS Grid techniques to create complex, responsive layouts that adapt beautifully across all devices.
+                    </p>
+                    <div class="post-meta">
+                        <span>March 20, 2024</span>
+                        <div class="read-time">
+                            <span>📖</span>
+                            <span>5 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <span class="post-category">JavaScript</span>
+                    <h3 class="post-title">Node.js Performance: Memory Management Best Practices</h3>
+                    <p class="post-excerpt">
+                        Optimize your Node.js applications with proven memory management strategies and performance monitoring techniques.
+                    </p>
+                    <div class="post-meta">
+                        <span>March 18, 2024</span>
+                        <div class="read-time">
+                            <span>📖</span>
+                            <span>7 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <span class="post-category">AI</span>
+                    <h3 class="post-title">Building Intelligent UIs with Machine Learning</h3>
+                    <p class="post-excerpt">
+                        Discover how to integrate machine learning models into your web applications for smarter, more adaptive user interfaces.
+                    </p>
+                    <div class="post-meta">
+                        <span>March 16, 2024</span>
+                        <div class="read-time">
+                            <span>📖</span>
+                            <span>12 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <span class="post-category">DevOps</span>
+                    <h3 class="post-title">Container Orchestration: Docker to Kubernetes</h3>
+                    <p class="post-excerpt">
+                        A comprehensive guide to scaling your applications from single Docker containers to full Kubernetes clusters.
+                    </p>
+                    <div class="post-meta">
+                        <span>March 14, 2024</span>
+                        <div class="read-time">
+                            <span>📖</span>
+                            <span>10 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <span class="post-category">Security</span>
+                    <h3 class="post-title">Web Security in 2024: Essential Protection Strategies</h3>
+                    <p class="post-excerpt">
+                        Stay ahead of cyber threats with the latest security practices and tools every web developer should know.
+                    </p>
+                    <div class="post-meta">
+                        <span>March 12, 2024</span>
+                        <div class="read-time">
+                            <span>📖</span>
+                            <span>6 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <span class="post-category">Mobile</span>
+                    <h3 class="post-title">Progressive Web Apps: The Native App Alternative</h3>
+                    <p class="post-excerpt">
+                        Build fast, engaging web applications that work offline and feel like native mobile apps using PWA technology.
+                    </p>
+                    <div class="post-meta">
+                        <span>March 10, 2024</span>
+                        <div class="read-time">
+                            <span>📖</span>
+                            <span>9 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        
+<%- include("partials/footer") %>
