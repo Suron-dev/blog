@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const articleSchema = Joi.object({
+const createArticleSchema = Joi.object({
     title: Joi.string().min(3).max(255).required().messages({
         'string.empty': 'Title is required.',
         'string.min': 'Title should be at least 3 characters long.'
@@ -13,4 +13,14 @@ const articleSchema = Joi.object({
     tags: Joi.string().max(255).allow('').optional(),
 });
 
-export default articleSchema;
+const updateArticleSchema = Joi.object({
+    title: Joi.string().min(3).max(255),
+    category_id: Joi.string(),
+    user_id: Joi.number().required(),
+    excerpt: Joi.string().allow('').optional(),
+    content: Joi.string(),
+    readTime: Joi.number().min(1),
+    tags: Joi.string().max(255).allow('').optional(),
+}).min(1)
+
+export { createArticleSchema, updateArticleSchema };

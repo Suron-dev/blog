@@ -1,0 +1,68 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime files
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# dotenv
+.env
+.env.*
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Test coverage
+coverage/
+
+# build output
+dist/
+build/
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+
+# Migrations (compiled or unnecessary)
+migrations/*.js
+!migrations/*.sql
+
+# Uploaded files
+uploads/
+
+# System files
+*.swp
+*.bak
+*.tmp
+
+# Optional: if using PM2 process manager
+pids/
+*.pid
+*.log
+
+# Frontend build
+public/build/
+public/dist/
+
+# Optional if using frontend frameworks like React/Vue in subfolder
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+
+# Optional: ignore editor backups
+*~

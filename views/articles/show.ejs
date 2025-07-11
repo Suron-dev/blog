@@ -5,9 +5,9 @@
         <!-- Article Header -->
         <header class="article-header">
             <div class="article-meta">
-                <span class="article-category"><%= article.category %></span>
-                <span class="article-date"><%= article.date %></span>
-                <span class="article-read-time">📖 <%= article.readTime %> min read</span>
+                <span class="article-category"><%= article.category_id %></span>
+                <span class="article-date"><%= article.formattedDate  %></span>
+                <span class="article-read-time">📖 <%= article.read_time %> min read</span>
             </div>
 
             <h1 class="article-title"><%= article.title %></h1>
@@ -19,7 +19,7 @@
             <div class="article-author">
                 <div class="author-avatar"></div>
                 <div class="author-info">
-                    <span class="author-name"><%= article.author %></span>
+                    <span class="author-name"><%= article.user_id %></span>
                     <span class="author-title">Contributor</span>
                 </div>
             </div>
@@ -36,14 +36,16 @@
                 <% if (article.tags && article.tags.length > 0) { %>
                     <h4>Tags:</h4>
                     <div class="tags-list">
-                        <% article.tags.forEach(tag => { %>
-                            <span class="tag"><%= tag.trim() %></span>
-                        <% }); %>
+                        <%= article.tags%>
                     </div>
                 <% } %>
             </div>
 
-            <div class="article-actions">
+
+            <button class="btn-primary mt-5" onclick="window.location.href='/article' ">back to articles</button>
+            <button class="btn-primary" onclick="window.location.href='/articles/edit/<%=article.id%>' ">Edit Article</button>
+
+            <div class="article-actions mt-5">
                 <button class="btn-secondary share-btn" onclick="shareArticle()">
                     <span class="btn-icon">📤</span>
                     <span class="btn-text">Share</span>
@@ -54,6 +56,7 @@
                 </button>
             </div>
         </footer>
+
 
         <!-- Related Articles -->
         <section class="related-articles">
@@ -90,7 +93,7 @@
                 </article>
             </div>
         </section>
-        <button class="btn-primary mt-5" onclick="window.location.href='/article' ">back to articles</button>
+
     </div>
 </div>
 <script>
