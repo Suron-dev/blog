@@ -6,7 +6,7 @@ class Article {
 
     static async getArticles() {
         try {
-            const {rows} = await db.query("SELECT * FROM article");
+            const {rows} = await db.query("SELECT * FROM article ORDER BY ID ASC LIMIT 12");
             if (rows.length === 0) throw new Error("no articles found");
             return {message: "Articles found successfully.", articles: rows};
         } catch (err) {

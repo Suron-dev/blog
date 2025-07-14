@@ -1,16 +1,27 @@
-import article from "../Model/Article.js";
-import { createArticleSchema, updateArticleSchema } from "../validations/articleValidation.js";
 import Article from "../Model/Article.js";
+import { createArticleSchema, updateArticleSchema } from "../validations/articleValidation.js";
 
 class ArticleController {
-    static async getAllArticles(req, res) {
+
+    static async showArticleIndex(req, res) {
         try {
-            const result = await article.getArticles();
+            const result = await Article.getArticles();
             if (result.error) return res.status(404).json({ error: result.error });
-            res.status(200).json({
-                message: result.message,
-                articles: result.articles,
+            const articles = result.articles;
+            const formattedArticles = articles.map((article) => {
+                const dateObj = new Date(article.created_at);
+                return {
+                    ...article,
+                    formattedDate : dateObj.toLocaleDateString("en-US" ,
+                        {
+                            year:"numeric",
+                            month:"long",
+                            day:"numeric",
+                        }),
+                    shortExcerpt: article.excerpt.length > 150 ? article.excerpt.slice(0, 100) + "..." : article.excerpt,
+                }
             });
+            res.render("articles/index.ejs" , {articles:formattedArticles });
         } catch (err) {
             res.status(500).json({ error: "Internal Server Error" });
         }
@@ -51,7 +62,7 @@ class ArticleController {
         }
         try {
             const { title, category_id, excerpt, content, user_id, readTime, tags } = value;
-            const result = await article.createArticle(
+            const result = await Article.createArticle(
                 title,
                 category_id,
                 excerpt,
@@ -60,7 +71,8 @@ class ArticleController {
                 readTime,
                 tags
             );
-            res.status(201).json(result);
+            console.log(result.rows);
+            res.redirect("/articles");
         } catch (err) {
             res.status(500).json({ error: "Internal Server Error (create article failed)" });
         }
@@ -70,8 +82,6 @@ class ArticleController {
         const id = parseInt(req.params.id);
         const result = await Article.getArticleById(id);
         if (result.error) return res.status(404).json({ error: result.error });
-        console.log(result.article);
-        console.log("article fetched . moving to edit article page");
         return res.render("articles/edit", { article: result.article });
     }
 
@@ -89,7 +99,7 @@ class ArticleController {
             const { title, category_id, excerpt, content, user_id, readTime, tags } = value;
             const id = parseInt(req.params.id);
             console.log(id);
-            const result = await article.updateArticle(
+            const result = await Article.updateArticle(
                 title,
                 category_id,
                 excerpt,

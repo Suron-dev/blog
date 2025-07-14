@@ -1,6 +1,6 @@
 <%- include("../partials/header.ejs") %>
 
-<div class="container">
+
     <div class="add-article-section">
         <button class="add-article-btn" onclick="openAddArticleModal()">
             <span class="btn-icon">✏️</span>
@@ -106,8 +106,32 @@
                 </div>
             </div>
         </article>
+
+        <% articles.forEach(article => { %>
+
+            <a href="/articles/<%=article.id %>">
+            <article class="post-card" >
+                <span class="post-category"><%= article.category_id %></span>
+                <h3 class="post-title"><%= article.title %></h3>
+                <p class="post-excerpt mt-5">
+                    <%= article.shortExcerpt %>
+                </p>
+                <div class="post-meta">
+                    <span><%= article.formattedDate %></span>
+                    <div class="read-time">
+                        <span>📖</span>
+                        <span><%= article.read_time %></span>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+       <% }); %>
+
+
+
     </div>
-</div>
+
 
 <script>
     function openAddArticleModal() {
