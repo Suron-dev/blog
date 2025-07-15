@@ -1,5 +1,45 @@
 <%- include("../partials/header.ejs") %>
 
-<span>hello world</span>
+<div class="create-article-section">
+    <h1 class="section-title">Create New Article</h1>
+
+    <form class="article-form" action="/category/create" method="POST">
+        <div class="form-group">
+            <label for="title" class="form-label">Article Title</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-input"
+                maxlength="150"
+                placeholder="Enter your category name ..."
+            />
+        </div>
+
+        <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="window.history.back()">
+                <span class="btn-icon">←</span>
+                <span class="btn-text">Cancel</span>
+            </button>
+            <button type="submit" class="btn btn-primary">
+                <span class="btn btn-icon">📝</span>
+                <span class="btn btn-text">Publish Category</span>
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+
+document.querySelector(".article-form").addEventListener("submit" , function (e) { 
+    const name = document.getElementById("name").value.trim();
+    if(name.length === 0 ) {
+        e.preventDefault();
+        alert("Please enter a category name.");
+        return;
+    }
+ })
+
+</script>
 
 <%- include("../partials/footer.ejs") %>

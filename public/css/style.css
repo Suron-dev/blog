@@ -310,7 +310,8 @@ body {
 }
 
 .btn-primary,
-.btn-secondary {
+.btn-secondary,
+.btn-danger {
     display: inline-flex;
     align-items: center;
     gap: 0.8rem;
@@ -352,6 +353,35 @@ body {
     box-shadow: 0 15px 35px rgba(124, 58, 237, 0.4);
     background: linear-gradient(135deg, #8b5cf6, #c084fc);
 }
+
+/* <!-- comments --> */
+
+.btn-danger {
+    background: linear-gradient(135deg, #ff4e6a, #b8324e); /* Vibrant but not harsh red-pink */
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(255, 78, 106, 0.15);
+}
+
+.btn-danger::before {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.13), transparent);
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #b8324e, #ff4e6a);
+    box-shadow: 0 15px 35px rgba(255, 78, 106, 0.22);
+    transform: translateY(-3px);
+}
+
+.btn-danger:active {
+    background: linear-gradient(135deg, #a12a3a, #ff4e6a);
+    box-shadow: 0 4px 12px rgba(255, 78, 106, 0.18);
+}
+
+.btn-danger:focus {
+    outline: 2px solid #ff4e6a;
+    outline-offset: 2px;
+}
+/* comments end */
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.1);
@@ -760,7 +790,7 @@ body {
     transition: all 0.4s ease;
     cursor: pointer;
     overflow: hidden;
-    height:25rem;
+    height: 25rem;
 }
 
 .post-card::after {
@@ -806,7 +836,7 @@ body {
     margin-bottom: 0.8rem;
     line-height: 1.4;
     transition: color 0.3s ease;
-    height:30%;
+    height: 30%;
 }
 
 .post-card:hover .post-title {
@@ -817,7 +847,7 @@ body {
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 1.5rem;
     line-height: 1.6;
-    height:30%;
+    height: 30%;
 }
 
 .post-meta {
@@ -947,6 +977,32 @@ body {
         justify-content: center;
         margin-bottom: 2rem;
     }
+}
+
+.category-table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    text-align: center;
+    border-radius: 20rem;
+}
+
+.category-table tr:nth-child(even) {
+    background: rgba(124, 58, 237, 0.07);
+}
+
+.category-table tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.category-table tr:hover {
+    background: rgba(168, 85, 247, 0.18);
+    transition: background 0.2s;
+}
+
+.category-table th, .category-table td {
+    padding: 16px 20px;
+    border-radius: 0;
 }
 
 /* Smooth Scrolling */

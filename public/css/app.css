@@ -10,7 +10,7 @@
     margin-top: 15px;
 }
 
-.mt-3 {
+.mt-4 {
     margin-top: 20px;
 }
 
@@ -18,3 +18,24 @@
     margin-top: 25px;
 }
 
+.p-1 {
+    padding: 5px;
+}
+
+.p-2 {
+    padding: 10px;
+}
+
+.p-3 {
+    padding: 15px;
+}
+
+.p-4 {
+    padding: 20px;
+}
+
+.btn {
+    max-width:6rem; 
+    max-height: 3rem;
+    justify-content: center;
+}

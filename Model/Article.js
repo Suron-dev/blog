@@ -16,7 +16,6 @@ class Article {
 
     static async createArticle(title, category_id, excerpt, content, user_id, readTime, tags) {
         const values = [title, category_id, excerpt, content, user_id, readTime, tags];
-        console.log(values);
         try {
             const result = await db.query(
                 "INSERT INTO article (title, category_id, excerpt, content, user_id, read_time, tags) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
@@ -24,11 +23,11 @@ class Article {
             );
             return {
                 message: "Article created successfully.",
-                article: result.rows[0]
+                article: result.rows[0],
             };
         } catch (err) {
             return {
-                error: err.message + " create article failed."
+                error: err.message + " create article failed in the Article model."
             };
         }
     }

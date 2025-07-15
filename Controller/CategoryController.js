@@ -6,11 +6,22 @@ import Utils from "../utils/Utils.js";
 class categoryController {
 
     static async index(req, res) {
-        res.status(200).json({message: "Category Controller index"});
+        try{
+            const result = await Category.getAllCategories();
+            const categories = result.categories;
+            if (!categories) return res.status(500).json({ message: result.error });
+            res.render("categories/index", { categories });
+        }catch(err){
+            res.status(500).json({message:"internal server error . failed to show all categories"});
+        }
     }
 
     static async showCreateForm(req , res) {
-        res.status(200).json({message:"create category page"});
+        try{
+            res.render("categories/create");
+        }catch(err){
+            res.status(500).json({message:"internal server error . failed to show create category form"});
+        }
     }
 
     static async createCategory(req, res) {

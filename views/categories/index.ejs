@@ -1,0 +1,29 @@
+<%- include("../partials/header.ejs") %>
+
+<h1 class="section-title">All Categories</h1>
+
+<table class="category-table">
+    <thead>
+        <tr>
+            <th class="p-3">ID</th>
+            <th class="p-3">Name</th>
+            <th class="p-3">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% categories.forEach(function(category) { %> 
+            <tr>
+                <td class="p-3"><%= category.id %></td>
+                <td class="p-3"><%= category.name %></td>
+                <td class="p-3">
+                    <a href="/category/update/<%= category.id %>" class="btn btn-primary">Update</a>
+                    <form action="/category/delete/<%= category.id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+<%- include("../partials/footer.ejs") %>

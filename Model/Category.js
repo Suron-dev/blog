@@ -8,7 +8,7 @@ class Category {
             if (rows.length === 0) return {message: "no category found" , categories : []};
             return {message: "category found", categories: rows};
         }catch(err){
-            return {error: err.message};
+            return {error: err.message + "failed to fetch all categories"};
         }
     }
 
