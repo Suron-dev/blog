@@ -1,141 +1,104 @@
 <%- include("../partials/header.ejs") %>
 
-<div class="container">
-    <div class="create-article-section">
-        <h1 class="section-title">Create New Article</h1>
+    <div class="container">
+        <div class="create-article-section">
+            <h1 class="section-title">Create New Article</h1>
 
-        <form class="article-form" action="/articles/update/<%=article.id%>" method="POST">
-            <input type="hidden" name="_method" value="PUT">
-            <div class="form-group">
-                <label for="title" class="form-label">Article Title</label>
-                <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    class="form-input"
-                    maxlength="255"
-                    value="<%= article?.title || '' %>"
-                    placeholder="Enter your article title..."
-                />
-            </div>
-
-            <div class="form-group">
-                <label for="category" class="form-label">Category</label>
-                <select id="category" name="category_id" class="form-select">
-                    <option value="">Select a category</option>
-                    <option value="1" <%= article.category_id == "1" ? "selected" : "" %>>Technology</option>
-                    <option value="Design" <%= article.category_id === "Design" ? "selected" : "" %>>Design</option>
-                    <option value="JavaScript" <%= article.category_id === "JavaScript" ? "selected" : "" %>>JavaScript</option>
-                    <option value="AI" <%= article.category_id === "AI" ? "selected" : "" %>>AI</option>
-                    <option value="DevOps" <%= article.category_id === "DevOps" ? "selected" : "" %>>DevOps</option>
-                    <option value="Security" <%= article.category_id === "Security" ? "selected" : "" %>>Security</option>
-                    <option value="Mobile" <%= article.category_id === "Mobile" ? "selected" : "" %>>Mobile</option>
-                    <option value="Tutorial" <%= article.category_id === "Tutorial" ? "selected" : "" %>>Tutorial</option>
-                    <option value="News" <%= article.category_id === "News" ? "selected" : "" %>>News</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="excerpt" class="form-label">Article Excerpt</label>
-                <textarea
-                    id="excerpt"
-                    name="excerpt"
-                    class="form-textarea"
-                    placeholder="Write a brief description of your article..."
-                    rows="3"
-                ><%= article?.excerpt || ''%>
-                </textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="content" class="form-label">Article Content</label>
-                <textarea
-                    id="content"
-                    name="content"
-                    class="form-textarea"
-                    placeholder="Write your article content here..."
-                    rows="12"
-
-                ><%= article?.content || ''%></textarea>
-            </div>
-
-            <div class="form-row">
+            <form class="article-form" action="/articles/update/<%=article.id%>" method="POST">
+                <input type="hidden" name="_method" value="PUT">
                 <div class="form-group">
-                    <label for="author" class="form-label">Author Name</label>
-                    <select name="user_id" id="author" class="form-select">
-                        <option value="">Select an author</option>
-                        <option value="1" <%= article.user_id === 1 ? "selected" : "" %> >author</option>
+                    <label for="title" class="form-label">Article Title</label>
+                    <input type="text" id="title" name="title" class="form-input" maxlength="255"
+                        value="<%= article?.title || '' %>" placeholder="Enter your article title..." />
+                </div>
+
+                <div class="form-group">
+                    <label for="category" class="form-label">Category</label>
+                    <select id="category" name="category_id" class="form-select">
+                        <% categories.forEach((category)=> { %>
+                            <option value="<%= category.id %>" <%=category.id === article.category_id ? 'selected' : '' %> >
+                                <%= category.name %>
+                            </option>
+                            <% }) %>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="readTime" class="form-label">Estimated Read Time (minutes)</label>
-                    <input
-                        type="number"
-                        id="readTime"
-                        name="readTime"
-                        class="form-input"
-                        placeholder="5"
-                        min="1"
-                        max="60"
-                        value="<%= article?.read_time || 0 %>"
-                    />
+                    <label for="excerpt" class="form-label">Article Excerpt</label>
+                    <textarea id="excerpt" name="excerpt" class="form-textarea"
+                        placeholder="Write a brief description of your article..." rows="3"><%= article?.excerpt || ''%>
+                </textarea>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label for="tags" class="form-label">Tags (comma separated)</label>
-                <input
-                    type="text"
-                    id="tags"
-                    name="tags"
-                    class="form-input"
-                    maxlength="255"
-                    placeholder="web development, javascript, tutorial"
-                    value="<%= article?.tags || '' %>"
-                />
-            </div>
+                <div class="form-group">
+                    <label for="content" class="form-label">Article Content</label>
+                    <textarea id="content" name="content" class="form-textarea"
+                        placeholder="Write your article content here..."
+                        rows="12"><%= article?.content || ''%></textarea>
+                </div>
 
-            <div class="form-actions">
-                <button type="button" class="btn-secondary" onclick="window.history.back()">
-                    <span class="btn-icon">←</span>
-                    <span class="btn-text">Cancel</span>
-                </button>
-                <button type="submit" class="btn-primary">
-                    <span class="btn-icon">📝</span>
-                    <span class="btn-text">Update Article</span>
-                </button>
-            </div>
-        </form>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="author" class="form-label">Author Name</label>
+                        <select name="user_id" id="author" class="form-select">
+                            <option value="">Select an author</option>
+                            <option value="1" <%=article.user_id === 1 ? "selected" : "" %> >author</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="readTime" class="form-label">Estimated Read Time (minutes)</label>
+                        <input type="number" id="readTime" name="readTime" class="form-input" placeholder="5" min="1"
+                            max="60" value="<%= article?.read_time || 0 %>" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tags" class="form-label">Tags (comma separated)</label>
+                    <input type="text" id="tags" name="tags" class="form-input" maxlength="255"
+                        placeholder="web development, javascript, tutorial" value="<%= article?.tags || '' %>" />
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="window.history.back()">
+                        <span class="btn-icon">←</span>
+                        <span class="btn-text">Cancel</span>
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        <span class="btn-icon">📝</span>
+                        <span class="btn-text">Update Article</span>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<script>
-    // Auto-resize textarea
-    document.querySelectorAll(".form-textarea").forEach((textarea) => {
-        textarea.addEventListener("input", function () {
-            this.style.height = "auto";
-            this.style.height = this.scrollHeight + "px";
+    <script>
+        // Auto-resize textarea
+        document.querySelectorAll(".form-textarea").forEach((textarea) => {
+            textarea.addEventListener("input", function () {
+                this.style.height = "auto";
+                this.style.height = this.scrollHeight + "px";
+            });
         });
-    });
 
-    // Form validation
-    document.querySelector(".article-form").addEventListener("submit", function (e) {
-        const title = document.getElementById("title").value.trim();
-        const content = document.getElementById("content").value.trim();
+        // Form validation
+        document.querySelector(".article-form").addEventListener("submit", function (e) {
+            const title = document.getElementById("title").value.trim();
+            const content = document.getElementById("content").value.trim();
 
-        if (title.length < 10) {
-            e.preventDefault();
-            alert("Article title must be at least 10 characters long.");
-            return;
-        }
+            if (title.length < 10) {
+                e.preventDefault();
+                alert("Article title must be at least 10 characters long.");
+                return;
+            }
 
-        if (content.length < 100) {
-            e.preventDefault();
-            alert("Article content must be at least 100 characters long.");
-            return;
-        }
-    });
-</script>
+            if (content.length < 100) {
+                e.preventDefault();
+                alert("Article content must be at least 100 characters long.");
+                return;
+            }
+        });
+    </script>
 
-<%- include("../partials/footer.ejs") %>
+    <%- include("../partials/footer.ejs") %>

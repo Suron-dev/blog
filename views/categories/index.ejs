@@ -1,5 +1,10 @@
 <%- include("../partials/header.ejs") %>
-
+    <div class="add-article-section">
+        <button class="add-article-btn" onclick="openAddArticleModal()">
+            <span class="btn-icon">✏️</span>
+            <span class="btn-text">Add New Category</span>
+        </button>
+    </div>
 <h1 class="section-title">All Categories</h1>
 
 <table class="category-table">
@@ -16,8 +21,9 @@
                 <td class="p-3"><%= category.id %></td>
                 <td class="p-3"><%= category.name %></td>
                 <td class="p-3">
-                    <a href="/category/update/<%= category.id %>" class="btn btn-primary">Update</a>
-                    <form action="/category/delete/<%= category.id %>?_method=DELETE" method="POST" style="display:inline;">
+                    <a href="/category/edit/<%= category.id %>" class="btn btn-primary">Update</a>
+                    <form action="/category/delete/<%= category.id %>" method="POST" style="display:inline;">
+                        <input type="hidden" name="_method" value="delete" >
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                     </form>
                 </td>
@@ -25,5 +31,11 @@
         <% }) %>
     </tbody>
 </table>
+
+<script>
+    function openAddArticleModal() {
+        window.location.href = "/category/create";
+    }
+</script>
 
 <%- include("../partials/footer.ejs") %>

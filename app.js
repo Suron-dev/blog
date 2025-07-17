@@ -18,9 +18,12 @@ app.set("view engine", "ejs");
 
 // Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride(function (req, res) {
+    return req.body._method || req.query._method;
+}));
 app.use(bodyParser.json());
 app.use(express.static("public"));
-app.use(methodOverride("_method"));
+
 
 // app.use(methodOverride(function (req, res) {
 //     console.log("methodOverride called", req.body._method);

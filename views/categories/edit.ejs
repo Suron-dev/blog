@@ -3,8 +3,8 @@
 <div class="create-article-section">
     <h1 class="section-title">Create New Article</h1>
 
-    <form class="article-form" action="/category/update" method="POST">
-        <input type="hidden" name ="__method" value="PUT" >
+    <form class="article-form" action="/category/update/<%= category.id  %>" method="POST">
+        <input type="hidden" name="_method" value="PUT">
         <div class="form-group">
             <label for="name" class="form-label">Category Name</label>
             <input
@@ -24,7 +24,7 @@
             </button>
             <button type="submit" class="btn btn-primary">
                 <span class="btn btn-icon">📝</span>
-                <span class="btn btn-text">Publish Category</span>
+                <span class="btn btn-text">Update Category</span>
             </button>
         </div>
     </form>

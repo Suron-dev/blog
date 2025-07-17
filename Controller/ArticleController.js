@@ -1,4 +1,5 @@
 import Article from "../Model/Article.js";
+import Category from "../Model/Category.js";
 import { createArticleSchema, updateArticleSchema } from "../validations/articleValidation.js";
 
 class ArticleController {
@@ -46,7 +47,9 @@ class ArticleController {
     }
 
     static async createArticlePage(req, res) {
-        res.render("articles/create");
+        const result = await Category.getAllCategories();
+        const categories = result.categories;
+        res.render("articles/create" , {categories : categories});
     }
 
     static async createArticle(req, res) {
@@ -82,7 +85,8 @@ class ArticleController {
         const id = parseInt(req.params.id);
         const result = await Article.getArticleById(id);
         if (result.error) return res.status(404).json({ error: result.error });
-        return res.render("articles/edit", { article: result.article });
+        const {categories} = await Category.getAllCategories();
+        return res.render("articles/edit", { article: result.article , categories:categories });
     }
 
     static async updateArticle(req, res) {
