@@ -33,7 +33,7 @@
                 <select id="category" name="category_id" class="form-select">
                     <option value="">Select a category</option>
                     <% categories.map((cat) => { %>
-                    <option value="<%= cat.id %>" <%= cat.id == article?.category_id ? 'selected' : '' %>>
+                    <option value="<%= cat.id %>" <%= cat.id == article?.category_id ? 'selected' : '' %>> <%= cat.name %> </option>
                     <% }) %>
                 </select>
             </div>
