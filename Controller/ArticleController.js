@@ -47,15 +47,11 @@ class ArticleController {
         }
     }
 
-
-    
     static async createArticlePage(req, res) {
         const result = await Category.getAllCategories();
         const categories = result.categories;
-        res.render("articles/create", { categories: categories ,  article: {}});
+        res.render("articles/create", { categories: categories, article: {} });
     }
-
-
 
     static async createArticle(req, res) {
         const { error, value } = createArticleSchema.validate(req.body, { abortEarly: false });
@@ -66,7 +62,7 @@ class ArticleController {
 
             return res.status(400).render("articles/create", {
                 errors,
-                article: value, 
+                article: value,
                 categories,
             });
         }
@@ -78,9 +74,25 @@ class ArticleController {
         try {
             const { title, category_id, excerpt, content, user_id, readTime, tags } = value;
 
-            const result = await Article.createArticle(title,category_id,excerpt,content,user_id,readTime,tags);
+            const result = await Article.createArticle(
+                title,
+                category_id,
+                excerpt,
+                content,
+                user_id,
+                readTime,
+                tags
+            );
             console.log(result);
 
+            if (result.error) {
+                const { categories } = await Category.getAllCategories();
+                return res.status(result.statusCode || 500).render("articles/create", {
+                    errors: [result.error],
+                    article: value,
+                    categories,
+                });
+            }
             return res.redirect("/articles");
         } catch (err) {
             console.error("Error in createArticle:", err.message);
@@ -104,18 +116,34 @@ class ArticleController {
 
     static async updateArticle(req, res) {
         delete req.body._method;
+
+        const id = parseInt(req.params.id);
+        if (!id || isNaN(id)) {
+            return res.status(400).send("Invalid article ID");
+        }
+
         const { error, value } = updateArticleSchema.validate(req.body, {
             abortEarly: false,
             allowUnknown: true,
         });
+
         if (error) {
             const errors = error.details.map((e) => e.message);
-            return res.status(400).json({ error: "input validations for update are failed:" + errors });
+            const { categories } = await Category.getAllCategories();
+            return res.status(400).render("articles/edit", {
+                errors,
+                article: { ...value, id },
+                categories,
+            });
         }
+
+        if (!value.excerpt || value.excerpt.trim() === "") {
+            value.excerpt = value.content.slice(0, 150);
+        }
+
         try {
             const { title, category_id, excerpt, content, user_id, readTime, tags } = value;
-            const id = parseInt(req.params.id);
-            console.log(id);
+
             const result = await Article.updateArticle(
                 title,
                 category_id,
@@ -126,13 +154,25 @@ class ArticleController {
                 tags,
                 id
             );
-            if (result.error) return res.status(500).json({ error: result.error });
-            res.status(200).json({
-                message: result.message,
-                article: result.article,
-            });
+
+            if (result.error) {
+                const { categories } = await Category.getAllCategories();
+                return res.status(result.statusCode || 500).render("articles/edit", {
+                    errors: [result.error],
+                    article: { ...value, id },
+                    categories,
+                });
+            }
+
+            return res.redirect("/articles");
         } catch (err) {
-            res.status(500).json({ error: "Internal Server Error (update article failed)" });
+            console.error("Update failed:", err.message);
+            const { categories } = await Category.getAllCategories();
+            return res.status(500).render("articles/edit", {
+                errors: ["Internal Server Error (update failed)"],
+                article: { ...value, id },
+                categories,
+            });
         }
     }
 }

@@ -5,11 +5,19 @@ const createArticleSchema = Joi.object({
         'string.empty': 'Title is required.',
         'string.min': 'Title should be at least 3 characters long.'
     }),
-    category_id: Joi.string().required(),
+    category_id: Joi.string().required().messages({
+        "string.empty" : "please select a category"
+    }),
     excerpt: Joi.string().allow('').optional(),
     content: Joi.string().required(),
-    user_id: Joi.number(),
-    readTime: Joi.number().min(1).required(),
+    user_id: Joi.number().required().messages({
+    "any.required": "Please select an author",
+    "number.base": "Please select a valid author"
+}),
+    readTime: Joi.number().min(1).required().messages({
+    "any.required": "Please select read time",
+    "number.base": "Please select a valid read time"
+}),
     tags: Joi.string().max(255).allow('').optional(),
 });
 

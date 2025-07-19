@@ -1000,7 +1000,8 @@ body {
     transition: background 0.2s;
 }
 
-.category-table th, .category-table td {
+.category-table th,
+.category-table td {
     padding: 16px 20px;
     border-radius: 0;
 }
@@ -1026,4 +1027,48 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, #764ba2, #f093fb);
+}
+
+.form-errors {
+    background: linear-gradient(135deg, rgba(255, 78, 106, 0.15), rgba(168, 85, 247, 0.1));
+    border: 1.5px solid #ff4e6a;
+    color: #ffb4c6;
+    border-radius: 18px;
+    padding: 1.2rem 2rem;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    box-shadow: 0 4px 24px rgba(255, 78, 106, 0.08);
+    backdrop-filter: blur(8px);
+    animation: shake 0.18s 2;
+}
+
+.form-errors ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.form-errors li {
+
+    margin-bottom: 0.5rem;
+    color: #ffb4c6;
+    list-style: disc inside;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-4px);
+    }
+    50% {
+        transform: translateX(4px);
+    }
+    75% {
+        transform: translateX(-4px);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
