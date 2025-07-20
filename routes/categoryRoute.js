@@ -1,5 +1,6 @@
 import express from "express";
 import CategoryController from "../Controller/CategoryController.js";
+
 const router = express.Router();
 
 router.get("/", CategoryController.index);

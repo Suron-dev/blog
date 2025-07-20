@@ -5,7 +5,7 @@ import methodOverride from "method-override";
 import articleRoutes from "./routes/articleRoutes.js";
 import appRoutes from "./routes/appRoutes.js";
 import categoryRoute from "./routes/categoryRoute.js";
-
+import authRoutes from "./routes/authRoutes.js";
 
 
 dotenv.config();
@@ -34,6 +34,7 @@ app.use(express.static("public"));
 
 
 app.use("/" , appRoutes);
+app.use("/user" , authRoutes)
 app.use("/articles", articleRoutes);
 app.use("/category" , categoryRoute);
 
