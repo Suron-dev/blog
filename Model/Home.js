@@ -1,7 +1,7 @@
 import db from "../config/db.js";
 
-class Home {
+// class Home {
 
-    static async 
+//     static async 
 
-}
+// }

@@ -6,8 +6,8 @@ import articleRoutes from "./routes/articleRoutes.js";
 import appRoutes from "./routes/appRoutes.js";
 import categoryRoute from "./routes/categoryRoute.js";
 import authRoutes from "./routes/authRoutes.js";
-
-
+import session from "express-session";
+import passport from "passport";
 dotenv.config();
 
 const app = express();
@@ -23,21 +23,35 @@ app.use(methodOverride(function (req, res) {
 }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  })
+);
 
+app.use(passport.initialize());
+app.use(passport.session());
 
-// app.use(methodOverride(function (req, res) {
-//     console.log("methodOverride called", req.body._method);
-//     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-//       return req.body._method;
-//     }
-//   }));
+app.use((req, res, next) => {
+  res.locals.user = req.user || null;
+  next();
+});
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  return res.redirect("/auth/login");
+}
 
 
 app.use("/" , appRoutes);
-app.use("/user" , authRoutes)
+app.use("/auth" , authRoutes)
 app.use("/articles", articleRoutes);
 app.use("/category" , categoryRoute);
-
 
 
 app.listen(PORT, () => {
